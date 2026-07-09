@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkinTell Skincare</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+</head>
+<body>
+    <div id="hamburger" class="hamburger">&#9776;</div>
+    <nav id="sideNav" class="side-nav">
+        <a href="#" id="navHome">Home</a>
+        <a href="#" id="navProducts">Product Recommendation</a>
+        <a href="#" id="navCart">Cart</a>
+        <a href="#" id="navTracker">Tracker</a>
+        <a href="#" id="navDiary">Diary</a>
+        <a href="#" id="navContact">Contact Us</a>
+        <a href="#" id="navAbout">About Us</a>
+        <span id="closeNav">&times;</span>
+    </nav>
+
+    <div class="hero">
+        <i><b> 
+            <h2>Your Skin, Your Story</h2>
+        </b></i>
+        <i>
+            <p class="tagline">Discover your perfect skincare journey</p>
+        </i>
+        <b> 
+            <h2>SKINTELL SkinCare 🌸</h2>
+        </b>
+    </div>
+    
+    <!-- Landing Page Floating Icons -->
+    <div id="landingIcons" class="floating-icons">
+        <img src="./assets/serum.png" class="icon" alt="Serum">
+        <img src="./assets/lotion.png" class="icon" alt="Lotion">
+        <img src="./assets/sun.png" class="icon" alt="Sun">
+        <img src="./assets/bubbles.png" class="icon" alt="Bubbles">
+    </div>
+
+    <!-- Login Icons -->
+    <div class="login-icon landing-login">
+        <img src="./assets/profile.png" alt="Profile" id="profileBtn">
+        <p>Login / Sign Up</p>
+    </div>
+    <div class="login-icon internal-login hidden">
+        <img src="./assets/profile.png" alt="Profile" id="profileTopRight">
+    </div>
+
+    <!-- Authentication Modal -->
+    <div id="authModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" id="closeModal">&times;</span>
+
+            <div class="tab-buttons">
+                <button id="signupTab" class="active">Sign Up</button>
+                <button id="loginTab">Login</button>
+            </div>
+
+            <!-- Sign Up Form -->
+            <form id="signupForm" class="form active">
+                <h2>Sign Up</h2>
+                <input type="text" id="signupUsername" placeholder="Username" required>
+                <input type="email" id="signupEmail" placeholder="Email" required>
+
+                <div class="password-container">
+                    <input type="password" id="signupPassword" placeholder="Password" required>
+                    <span class="toggle-password" id="toggleSignupPassword">👁️</span>
+                </div>
+
+                <div class="captcha-box">
+                    <span id="captchaText"></span>
+                    <button type="button" id="refreshCaptcha">↻</button>
+                </div>
+                <input type="text" id="signupCaptchaInput" placeholder="Enter Captcha" required>
+
+                <button type="submit" id="signupBtn">Sign Up</button>
+            </form>
+
+            <!-- Incorrect Captcha Popup -->
+<div id="captchaErrorPopup" class="popup">
+    <div class="popup-content">
+        <p>❌ Incorrect captcha! Please try again.</p>
+        <button id="closeCaptchaError">OK</button>
+    </div>
+</div>
+
+
+            <!-- Login Form -->
+            <form id="loginForm" class="form">
+                <h2>Login</h2>
+                <input type="text" id="loginUsername" placeholder="Username" required>
+
+                <div class="password-container">
+                    <input type="password" id="loginPassword" placeholder="Password" required>
+                    <span class="toggle-password" id="toggleLoginPassword">👁️</span>
+                </div>
+                <button type="submit" id="loginBtn">Login</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Sign Up Success Popup -->
+    <div id="signupPopup" class="popup">
+  <div class="popup-content">
+    <p>Successfully✅ Signed in! Please Login</p>
+  </div>
+</div>
+
+<!-- Login Success Popup -->
+<div id="loginPopup" class="popup welcome-popup">
+    <div class="popup-content">
+        <p>Hello, <span id="welcomeUsername"></span>! Welcome. 🎉</p>
+    </div>
+</div>
+
+<!-- Wrong Login Popup Modal -->
+<div id="wrongLoginModal" class="popup-modal">
+  <div class="popup-content">
+    <span id="closeWrongLogin" class="close-btn">&times;</span>
+    <h3>Login Failed</h3>
+    <p>Incorrect username or password. Please try again.</p>
+  </div>
+</div>
+
+    <div id="page3" class="page3 hidden">
+        <div class="page3-header">
+            <img src="./assets/profile.png" class="login-top" id="profileTop">
+        </div>
+        <div class="floating-icons">
+            <img src="./assets/lady.png" class="icon" alt="Lady">
+            <img src="./assets/bubbles.png" class="icon" alt="Bubbles">
+            <img src="./assets/cream.png" class="icon" alt="Cream">
+            <img src="./assets/water.png" class="icon" alt="Water">
+        </div>
+        <div class="page3-top">
+            <h2><i>"In every drop, a story to tell, Of healing, care, and feeling well."</i></h2>
+        </div>
+        <div class="page3-center">
+            <h2>Uncertain about your skin type?</h2>
+            <h2>Let's decode it together!</h2>
+            <div class="steps-container">
+                <div class="step-box">Step 1: Cleanse your face</div>
+                <div class="step-box">Step 2: Observe skin after 1 hour</div>
+                <div class="step-box">Step 3: Note areas of dryness/oiliness</div>
+            </div>
+            <div class="skin-buttons">
+    <button class="skin-type-btn" data-type="dry" onclick="openForm('dry')">Dry</button>
+    <button class="skin-type-btn" data-type="oily" onclick="openForm('oily')">Oily</button>
+    <button class="skin-type-btn" data-type="normal" onclick="openForm('normal')">Normal</button>
+    <button class="skin-type-btn" data-type="combination" onclick="openForm('combination')">Combination</button>
+    <button class="skin-type-btn" data-type="acne" onclick="openForm('acne')">Acne</button>
+</div>
+
+        </div>
+    </div>
+
+    <div id="homePage" class="home-page hidden">
+        <div class="floating-icons">
+            <img src="./assets/calender.png" class="icon" alt="Calender">
+            <img src="./assets/daynight.png" class="icon" alt="Daynight">
+            <img src="./assets/essentialoil.png" class="icon" alt="Essentialoil">
+            <img src="./assets/Diet.png" class="icon" alt="Diet">
+        </div>
+
+        <div class="login-top-right">
+            <img src="./assets/profile.png" id="profileBtnTop" alt="Profile">
+        </div>
+
+        <div class="center-taglines">
+            <div class="tagline-block active">
+            </div>
+            <div class="top-center-text">
+                <b2>Your skin tells your story; make it a luminous one.</b2>
+            </div>
+            <i>
+                <p>Pores, pixels, and a pinch of poetry, welcome to skincare that thinks for you.</p>
+            </i>
+            <h2>SKINTELL SkinCare</h2>
+        </div>
+
+        <div id="skincareTipCard" class="tip-card">
+            <p id="tipText">Loading tips...</p>
+        </div>
+    </div>
+
+ <!-- Skinfolio Modal (Only for Home Page) -->
+<div id="skinfolioModal" class="modal hidden">
+  <div class="modal-content">
+    <h2>Skinfolio 🌸</h2>
+    <p><strong>Name:</strong> <span id="skinfolioName"></span></p>
+    <p><strong>Email:</strong> <span id="skinfolioEmail"></span></p>
+    <p><strong>Skin Type:</strong> <span id="skinfolioSkinType"></span></p>
+    <div class="skinfolio-buttons">
+        <button id="logoutBtn">Logout🚪</button>
+        <button id="skinfolioCloseBtn">✖</button>
+    </div>
+  </div>
+</div>
+
+    <!-- Tracker Section (Hidden by default) -->
+<section id="trackerSection" class="tracker hidden" style="display: none;">
+    <div class="floating-icons floating-icons-tracker">
+        <img src="./assets/tracker.png" class="icon" alt="Tracker">
+        <img src="./assets/calender.png" class="icon" alt="Calender">
+        <img src="./assets/route.png" class="icon" alt="Route">
+        <img src="./assets/list.png" class="icon" alt="List">
+        <img src="./assets/success.png" class="icon" alt="success"> 
+        <img src="./assets/yoga.png" class="icon" alt="Yoga">
+    </div>
+    
+    <h2><i><b>Daily Skincare Tracker</b></i></h2>
+
+    <!-- Daily Habits -->
+    <div id="habitChecklist" class="tracker-card">
+        <h3>Daily Habits</h3>
+        <label><input type="checkbox" class="habit-checkbox" data-habit="Cleanse"> Cleanse</label>
+        <label><input type="checkbox" class="habit-checkbox" data-habit="Meditation or mindfulness"> Meditation or mindfulness</label>
+        <label><input type="checkbox" class="habit-checkbox" data-habit="Sunscreen"> Sunscreen</label>
+        <label><input type="checkbox" class="habit-checkbox" data-habit="Exercise"> Exercise</label>
+        <label><input type="checkbox" class="habit-checkbox" data-habit="Get 7–9 hours of quality sleep"> Get 7–9 hours of quality sleep</label>
+        <label><input type="checkbox" class="habit-checkbox" data-habit="Avoid junk food"> Avoid junk food</label>
+    </div>
+
+    <!-- Selfie Upload -->
+    <div id="selfieUpload" class="tracker-card">
+        <h3>Upload Daily Selfie</h3>
+        <input type="file" id="selfieInput" accept="image/*">
+        <div id="selfiePreview" class="selfie-preview"></div>
+        <button id="viewGalleryBtn">View Skin Progress</button>
+    </div>
+
+    <!-- Gallery -->
+    <div id="gallerySection" class="tracker-card hidden">
+        <h3>Your Skin Progress</h3>
+        <div id="galleryContainer" class="gallery-container"></div>
+        <button id="hideGalleryBtn">Hide Gallery</button>
+    </div>
+
+    <!-- Additional Tasks -->
+    <div id="skincareTasks" class="tracker-card">
+        <h3>Additional Skincare Tasks</h3>
+        <input type="text" id="newTaskInput" placeholder="Add new task">
+        <button id="addTaskBtn">Add Task</button>
+        <ul id="taskList" class="task-list"></ul>
+    </div>
+
+    <!-- Progress -->
+    <div id="progressContainer" class="progress-container">
+        <h3><b>Progress</b></h3>
+        <div id="progressBar" class="progress-bar">
+            <div id="progressFill" class="progress-fill"></div>
+        </div>
+        <p id="progressText">0% completed</p>
+    </div>
+
+    <!-- Save Tracker Button -->
+    <button id="saveTrackerBtn" class="save-tracker-btn">💾 Save Tracker</button>
+</section>
+
+ <!-- Toast Notification -->
+<div id="toast" class="toast">Your progress has been saved!</div>
+
+
+<!-- Modal for Image -->
+<div id="imageModal" class="modal hidden">
+    <span class="modal-close-btn">&times;</span>
+    <img class="modal-content" id="modalImage">
+    <div id="caption"></div>
+</div>
+
+
+<!-- Diary full-page section -->
+<div id="diaryPage" class="tracker hidden">
+    <div class="diary-header">
+        <h2>📝 My Skin Diary</h2>
+    </div>
+    <div class="diary-entries" id="diaryEntriesContainer"></div>
+    <textarea id="diaryInput" placeholder="Write about your skin today..."></textarea>
+    <button id="saveDiaryBtn">Add Entry</button>
+</div>
+
+    <div id="contactUsSection" class="contact-section hidden">
+        <h2>Contact Us</h2>
+        <p><strong>AI Skincare – Where Science Meets Self-Care</strong></p>
+        <p>Got questions about your skincare journey?<br>Reach out – we’re here to make skincare simple, smart, and stress-free!</p>
+        <p><strong>Email:</strong> support@aiskincare.com</p>
+        <p><strong>Phone:</strong> +91 98765 43210</p>
+        <p><strong>Address:</strong> Mumbai, Maharashtra, India</p>
+        <p><strong>Support Hours:</strong> Mon–Sat, 10:00 AM – 6:00 PM IST</p>
+        <h3>Quick Links:</h3>
+        <ul>
+            <li>Privacy Policy</li>
+            <li>Terms & Conditions</li>
+            <li>FAQ Page</li>
+        </ul>
+        <p><strong>Social Media:</strong> Instagram | Facebook | Twitter | LinkedIn</p>
+    </div>
+
+    <!-- CHANGE HERE: Added the 'hidden' class to ensure it's treated as a page that needs to be explicitly shown -->
+    <div id="aboutUsSection" class="about-us-container hidden" style="display: none;">
+    <section class="about-us-card about-us-section">
+
+        <!-- Welcome Section -->
+        <h1 class="header-welcome">
+            Welcome to SkinTell 🌸
+        </h1>
+        <p class="tagline-intro">
+            SkinTell is your “The clear winner” for personalized skincare—blending science with simplicity to reveal your healthiest glow.
+        </p>
+        <hr class="divider-line">
+
+        <!-- Our Purpose Section -->
+        <div class="content-block">
+            <h2 class="header-section">Our Purpose 🌟</h2>
+            <p class="text-content">
+                Our sole purpose is to **demystify skincare**. We cut through the confusion and jargon to provide you with clear, evidence-based recommendations tailored specifically to your unique skin profile. We believe that everyone deserves to feel confident and informed about the products they use.
+            </p>
+        </div>
+
+        <!-- Our Mission Section -->
+        <div class="content-block">
+            <h2 class="header-section">Our Mission ⚡</h2>
+            <p class="text-content">
+                To be the most trusted and accessible platform for skincare analysis and guidance. We are committed to using cutting-edge technology and dermatological expertise to deliver highly accurate, easy-to-understand skin health assessments directly to you, anywhere in the world.
+            </p>
+        </div>
+
+        <!-- Our Vision Section -->
+        <div class="content-block">
+            <h2 class="header-section">Our Vision 🔭</h2>
+            <p class="text-content">
+                We envision a future where skincare is never a guessing game. SkinTell will be the global standard for personalized beauty technology, fostering a community where healthy skin is achievable for all, without compromise or complexity.
+            </p>
+        </div>
+
+        <!-- Our Promise Section -->
+        <div class="content-block-last">
+            <h2 class="header-section">Our Promise 🤝</h2>
+            <p class="text-content">
+                We promise to always prioritize your skin's health and well-being. This means offering unbiased, transparent information, maintaining the highest standards of data security, and continuously innovating our platform to serve your evolving needs. Your skin journey is our commitment.
+            </p>
+        </div>
+
+    </section>
+</div>
+    
+    <!-- Skin Type Not Selected Popup -->
+<div id="skinTypeErrorPopup" class="popup">
+    <div class="popup-content">
+        <p>⚠️ Please select your skin type on the Skin Detection page.</p>
+        <button id="closeSkinTypeError">OK</button>
+    </div>
+</div>
+
+
+    <div id="productPage" class="product-page hidden">
+        <h2>Select Your Skincare Level</h2>
+        <div class="level-buttons">
+            <button onclick="selectLevel('beginner')">Beginner (3 Products)</button>
+            <button onclick="selectLevel('moderate')">Moderate (5 Products)</button>
+            <button onclick="selectLevel('expert')">Expert (7 Products)</button>
+        </div>
+        <div id="productList" class="product-list"></div>
+    </div>
+
+    <div id="cartPage" class="cart-page hidden">
+        <h2>My Cart 🛒</h2>
+        <div id="cartItems"></div>
+        <div class="cart-summary">
+            <h3>Total: <span id="cartTotal">₹0</span></h3>
+            <button id="checkoutBtn">Proceed to Checkout</button>
+        </div>
+    </div>
+
+    <div id="checkoutPage" class="checkout-page hidden">
+    <h2>Checkout</h2>
+    <div class="checkout-form">
+        <label for="name">Full Name:</label>
+        <input type="text" id="name" placeholder="Full Name" required>
+
+        <label for="address">Shipping Address:</label>
+        <textarea id="address" placeholder="Street, City, State, ZIP Code" required></textarea>
+
+        <label for="phone">Phone Number:</label>
+        <input type="text" id="phone" placeholder="Enter your phone number" required>
+
+        <label for="email">Email:</label>
+        <div id="otp-section">
+            <input type="email" id="email" placeholder="Enter your email" required>
+            <button type="button" id="send-otp-btn">Send OTP</button>
+
+            <div id="verify-otp-div" style="display:none; margin-top:10px;">
+                <input type="text" id="otp" placeholder="Enter OTP">
+                <button type="button" id="verify-otp-btn">Verify OTP</button>
+            </div>
+
+            <p id="otp-message" style="color:green; margin-top:5px;"></p>
+        </div>
+
+        <label for="payment-method">Payment Method:</label>
+        <select id="payment-method" required>
+            <option value="">Select Method</option>
+            <option value="cod">Cash on Delivery</option>
+            <option value="card">Credit/Debit Card</option>
+            <option value="upi">UPI</option>
+        </select>
+        <div id="paymentDetails" style="display: none;">
+            <input type="text" id="cardNumber" placeholder="Card Number">
+            <input type="text" id="cardExpiry" placeholder="MM/YY">
+            <input type="text" id="cardCVC" placeholder="CVC">
+        </div>
+
+        <button id="confirmOrderBtn">Confirm Order</button>
+    </div>
+</div>
+
+<div id="confirmationModal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn">&times;</span>
+        <p id="confirmationMessage"></p>
+    </div>
+</div>
+
+
+<!-- Invoice Page -->
+<div id="invoicePage" class="page" style="display: none;">
+  <h2 class="invoice-header">🌸 SkinTell Skincare - Invoice</h2>
+  <div class="invoice-container">
+    <!-- Invoice Header -->
+    <div class="invoice-brand">
+      <h3>SkinTell Skincare</h3>
+      <p class="invoice-date">Date: <span id="invoiceDate"></span></p>
+      <p class="invoice-id">Invoice ID: <span id="invoiceId"></span></p>
+    </div>
+
+    <!-- Customer Details -->
+    <div class="invoice-section">
+      <h4>Customer Details</h4>
+      <p><strong>Name:</strong> <span id="invoiceCustomerName"></span></p>
+      <p><strong>Address:</strong> <span id="invoiceCustomerAddress"></span></p>
+    </div>
+
+    <!-- Order Summary -->
+    <div class="invoice-section">
+      <h4>Order Summary</h4>
+      <table class="invoice-table">
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>Brand</th>
+            <th>Qty</th>
+            <th>Price (₹)</th>
+          </tr>
+        </thead>
+        <tbody id="invoiceItems"></tbody>
+      </table>
+      <p class="invoice-total"><strong>Total: ₹<span id="invoiceTotal"></span></strong></p>
+    </div>
+
+    <!-- Footer -->
+    <div class="invoice-footer">
+      <p>💖 Thank you for shopping with <strong>SkinTell Skincare</strong>!</p>
+    </div>
+
+    <!-- Actions -->
+    <div class="invoice-actions">
+      <button id="downloadInvoiceBtn">📥 Download Invoice (PDF)</button>
+      <button id="backToHomeFromInvoice">🏠 Back to Home</button>
+    </div>
+  </div>
+</div>
+    
+    <footer>
+        <p>Contact us for more details</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
